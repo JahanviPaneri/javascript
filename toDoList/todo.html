@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6765da, #000000);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+    
+        /* Task input container */
+        .task {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+    
+        /* Input field styles */
+        .input {
+            padding: 12px 18px;
+            font-size: 16px;
+            width: 350px;
+            border-radius: 30px;
+            border: 2px solid #ccc;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .input:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+        }
+    
+        /* Add button styles */
+        .add {
+            padding: 12px 24px;
+            font-size: 16px;
+            margin-left: 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+    
+        .add:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+    
+        /* Task list container */
+        .list {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+    
+        /* Individual task block */
+        .oneBlock {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+    
+        .oneBlock:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+        }
+    
+        /* Task text */
+        .oneBlock pre {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+            flex: 1;
+        }
+    
+        /* Delete button styles */
+        .delete {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .delete:hover {
+            background-color: #e53935;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .done {
+            width: 40px;
+            height: 20px;
+            margin-right: 10px;
+            position: absolute;
+            right: 70px; /* Adjust this value to create space between the delete button and the checkbox */
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .done:hover {
+            transform: translateY(-50%) scale(1.2); /* Add hover animation */
+        }
+    
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .task {
+                flex-direction: column;
+                align-items: stretch;
+            }
+    
+            .input {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .add {
+                width: 100%;
+            }
+    
+            .list {
+                max-width: 100%;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="task">
+        <input type="text" class="input">
+        <button class="add">add</button>
+    </div>
+    <div class="list">
+        
+    </div>
+</body>
+<script>
+    lst = [];
+    var counter = 0;
+    document.querySelector('.add').addEventListener('click',addToList);
+    window.addEventListener('keydown',function(e){
+        if(e.key == 'Enter'){
+            addToList();
+        }
+    });
+    function addToList(){
+        var task = document.querySelector('.input').value;
+        lst.push(task);
+        var allTasks = document.querySelector('.list');
+        if (task != '') {
+            allTasks.innerHTML += `
+                <div class="oneBlock" id='${counter}' style='display: flex'>
+                    <pre id="task">task = ${task}</pre>
+                    <input type="checkbox" class="done">
+                    <button class="delete" onclick='DeleteItem(${counter})'>delete</button>
+                </div>
+            `;
+            counter++;
+        }
+        document.querySelector('.input').value = '';
+    }
+    function DeleteItem(id){
+        var element = document.getElementById(id);
+        if (element) {
+            element.remove(); 
+        }
+    }
+</script>
+</html>

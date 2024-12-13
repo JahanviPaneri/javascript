@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="first.js"></script>
+</head>
+<body>
+    <a href="#section1">Section 1</a>
+    <a href="#section2">Section 2</a>
+    <button onclick="resetHash()">reset</button>
+    <h1>rock paper scissor game</h1>
+    <div id="section1">
+        <button  onclick="enableGame('rock')">rock</button>
+        <button  onclick="enableGame('paper')">paper</button>
+        <button  onclick="enableGame('scissors')">scissor</button>
+    </div>
+    <div id="section2" class="answer">
+
+    </div>
+    <div class="output"></div>
+</body>
+<script>
+    count = 0;
+    window.addEventListener('click', function(){
+        count++;
+        if(count == 3){
+            document.querySelector('.output').innerHTML = 'hello';
+            count=0;
+        }else{
+            document.querySelector('.output').innerHTML = '';
+        }
+    });
+</script>
+</html>

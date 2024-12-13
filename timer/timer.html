@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+</head>
+<body>
+    <div class="timer"></div>
+    <button class="flag"> flag </button>
+    <div class="flagged"></div>
+</body>
+<script>
+    timer = document.querySelector('.timer');
+    timer.innerHTML = new Date().toLocaleTimeString();
+    var lst = [];
+    setInterval(function(){
+        timer.innerHTML = new Date().toLocaleTimeString();
+    }, 1000);
+    document.querySelector('.flag').addEventListener('click', function(){
+        lst.push(timer.innerHTML);
+        document.querySelector('.flagged').innerHTML = lst.map(item => item + '<br>').join('');
+        console.log(lst);
+    });
+</script>
+</html>
